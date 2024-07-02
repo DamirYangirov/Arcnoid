@@ -24,15 +24,27 @@ public class Ball {
     }
 
     public void update() {
-        x += xSpeed;
+        /*x += xSpeed;
         y += ySpeed;
         if (x-size < 0 || x+size > Gdx.graphics.getWidth()) {
             xSpeed = -xSpeed;
         }
         if (y-size < 0 || y+size > Gdx.graphics.getHeight()) {
             ySpeed = -ySpeed;
+        }*/
+    }
+    public void checkCollision(Paddle paddle) {
+        if(collidesWith(paddle)){
+            color = Color.GREEN;
+        }
+        else{
+            color = Color.WHITE;
         }
     }
+    private boolean collidesWith(Paddle paddle) {
+        return Math.random()>.5;
+    }
+
 
     public void draw(ShapeRenderer shape) {
         shape.circle(x, y, size);
