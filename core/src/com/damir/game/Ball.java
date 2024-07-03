@@ -2,6 +2,9 @@ package com.damir.game;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Intersector;
+import com.badlogic.gdx.math.Rectangle;
 
 import java.awt.Color;
 import java.awt.Shape;
@@ -12,7 +15,7 @@ public class Ball {
     int size;
     int xSpeed;
     int ySpeed;
-
+    Circle circle;
     Color color = Color.WHITE;
 
     public Ball(int x, int y, int size, int xSpeed, int ySpeed) {
@@ -21,33 +24,39 @@ public class Ball {
         this.size = size;
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
+        this.circle = getCircle();
     }
 
     public void update() {
-        /*x += xSpeed;
+        x += xSpeed;
         y += ySpeed;
-        if (x-size < 0 || x+size > Gdx.graphics.getWidth()) {
+
+        if (x-size < 0 || x+size > Gdx.graphics.getWidth())   {
             xSpeed = -xSpeed;
         }
         if (y-size < 0 || y+size > Gdx.graphics.getHeight()) {
             ySpeed = -ySpeed;
-        }*/
-    }
-    public void checkCollision(Paddle paddle) {
-        if(collidesWith(paddle)){
-            color = Color.GREEN;
         }
-        else{
-            color = Color.WHITE;
-        }
-    }
-    private boolean collidesWith(Paddle paddle) {
-        return Math.random()>.5;
     }
 
+    public void changeDirection(){
+
+    }
+
+    Boolean state= false;
+
+
+    public Circle getCircle() {
+        return new Circle(x,y, size);
+    }
 
     public void draw(ShapeRenderer shape) {
         shape.circle(x, y, size);
+        if(state){
+            shape.setColor(1, 0, 0, 1); // красный цвет при столкновении
+        } else {
+            shape.setColor(0, 1, 0, 1); // зеленый цвет, если нет столкновения
+        }
     }
 
 

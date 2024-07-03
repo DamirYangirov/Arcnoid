@@ -3,6 +3,7 @@ package com.damir.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
 
 public class Paddle {
     float x;
@@ -10,6 +11,7 @@ public class Paddle {
     float width;
     float height;
     float speedX;
+    Rectangle rectangle;
 
 
 
@@ -19,10 +21,10 @@ public class Paddle {
         this.width = width;
         this.height = height;
         this.speedX = speedX;
+        this.rectangle =getRectangle();
     }
 
     public void draw(ShapeRenderer shape) {
-
         shape.rect(x, y, width, height);
     }
 
@@ -30,10 +32,6 @@ public class Paddle {
         rightMove();
         leftMove();
         mouseMove();
-
-
-
-
 
     }
 
@@ -64,10 +62,11 @@ public class Paddle {
     }
     public void mouseMove(){
         y =Gdx.graphics.getHeight()-Gdx.input.getY()-height/2;
-        System.out.println(y);
         x = Gdx.input.getX()-width/2;
     }
 
-
+    public Rectangle getRectangle() {
+        return  new Rectangle(x, y, width, height);
+    }
 
 }
