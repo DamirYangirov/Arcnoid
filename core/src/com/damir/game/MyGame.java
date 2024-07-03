@@ -19,8 +19,8 @@ public class MyGame extends ApplicationAdapter {
     @Override
     public void create() {
         shape = new ShapeRenderer();
-        ball = new Ball(150, 180, 20, 4, 8);
-        paddle = new Paddle(Gdx.graphics.getWidth()/2, 15, 150, 90, 15);
+        ball = new Ball(150, 180, 10, 4, 8);
+        paddle = new Paddle(Gdx.graphics.getWidth()/2, 150, 150, 40, 15);
     }
 
     @Override
@@ -29,22 +29,29 @@ public class MyGame extends ApplicationAdapter {
         //state = произошел ли удар
         ball.state = CollisionUtils.overlaps(ball.getCircle(), paddle.getRectangle());
         shape.begin(ShapeRenderer.ShapeType.Filled);
+        if(ball.state){
+            ball.xSpeed = -ball.xSpeed;
+            ball.ySpeed = -ball.ySpeed;
+            ball.state = false;
+        }
+
+        checkCollision(ball.x, ball.y, paddle.getRectangle());
         ball.draw(shape);
         ball.update();
         paddle.draw(shape);
         paddle.update();
         shape.end();
-        checkCollision(ball.x, ball.y, paddle.getRectangle());
+
 
     }
 
     public void checkCollision(float xBall, float yBall, Rectangle rectangle) {
-        //if ((xBall > rectangle.x && xBall < rectangle.x + rectangle.width) && (yBall> rectangle.y && yBall < rectangle.height)) {
-        if ((xBall+ ball.size >= rectangle.x && xBall+ ball.size <= rectangle.x + rectangle.width) && (yBall+ball.size>= rectangle.y && yBall+ball.size <= rectangle.height)) {
+       /* //if ((xBall > rectangle.x && xBall < rectangle.x + rectangle.width) && (yBall> rectangle.y && yBall < rectangle.height)) {
+        if ((xBall >= rectangle.x && xBall <= rectangle.x + rectangle.width) && (yBall>= rectangle.y && yBall <= rectangle.height)) {
             ball.xSpeed = -ball.xSpeed;
             ball.ySpeed = -ball.ySpeed;
             System.out.println("left");
-        }
+        }*/
     }
 
 
