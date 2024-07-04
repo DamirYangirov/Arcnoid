@@ -25,13 +25,14 @@ public class Paddle {
     }
 
     public void draw(ShapeRenderer shape) {
+
         shape.rect(x, y, width, height);
     }
 
     public void update() {
         rightMove();
         leftMove();
-        /*mouseMove();*/
+        mouseMove();
 
     }
 
@@ -60,10 +61,10 @@ public class Paddle {
             }
         }
     }
-    /*public void mouseMove(){
+    public void mouseMove(){
         y =Gdx.graphics.getHeight()-Gdx.input.getY()-height/2;
         x = Gdx.input.getX()-width/2;
-    }*/
+    }
 
     public Rectangle getRectangle() {
         return  new Rectangle(x, y, width, height);
